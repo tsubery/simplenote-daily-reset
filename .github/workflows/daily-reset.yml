@@ -1,0 +1,40 @@
+name: Reset Simplenote daily checklist
+
+on:
+  schedule:
+    # 05:00 UTC every day. GitHub scheduled workflows always use UTC.
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: simplenote-daily-reset
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Configure Simplenote MCP
+        run: |
+          mkdir -p "$XDG_CONFIG_HOME/simplenote-mcp"
+          printf '%s\n' '{"source":"api","writeMode":true}' > "$XDG_CONFIG_HOME/simplenote-mcp/config.json"
+
+      - name: Reset daily checklist
+        env:
+          SIMPLENOTE_TOKEN: ${{ secrets.SIMPLENOTE_TOKEN }}
+          SIMPLENOTE_MCP_DISABLE_TELEMETRY: '1'
+        run: npm run reset
+        timeout-minutes: 2

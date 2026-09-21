@@ -1,0 +1,17 @@
+{
+  "name": "simplenote-daily-reset",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reset completed checkboxes in the Daily section of a tagged Simplenote note.",
+  "type": "module",
+  "scripts": {
+    "reset": "node src/reset-daily.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@automattic/simplenote-mcp": "2.0.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
