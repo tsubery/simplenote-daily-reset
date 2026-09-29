@@ -2,8 +2,7 @@ name: Reset Simplenote daily checklist
 
 on:
   schedule:
-    # 05:00 UTC every day. GitHub scheduled workflows always use UTC.
-    - cron: '0 10 * * *'
+    - cron: '0 5 * * *'
   workflow_dispatch:
 
 concurrency:
