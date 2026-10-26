@@ -1,4 +1,4 @@
-const HEADING = /^(#{1,6})[ \t]+Daily[ \t]*#*[ \t]*$/i;
+const HEADING = /^(#{1,6})[ \t]+Daily/i;
 const ANY_HEADING = /^(#{1,6})[ \t]+/;
 const CHECKED_BOX = /^(\s*(?:[-+*]|\d+[.)])\s+\[)[xX](\])/;
 
